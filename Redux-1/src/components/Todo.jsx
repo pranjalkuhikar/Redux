@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addTodo,
@@ -11,6 +11,7 @@ const Todo = () => {
   const [todo, setTodo] = useState("");
   const [editText, setEditText] = useState("");
   const [editId, setEditId] = useState(null);
+  const [filter, setFilter] = useState("all"); // 🔥 filter state
 
   const dispatch = useDispatch();
   const todoState = useSelector((state) => state.todo.list);
@@ -34,6 +35,13 @@ const Todo = () => {
     }
   };
 
+  // 🔥 Filtered todos logic
+  const filteredTodos = todoState.filter((todo) => {
+    if (filter === "completed") return todo.completed;
+    if (filter === "active") return !todo.completed;
+    return true;
+  });
+
   return (
     <>
       <form onSubmit={handlerSubmit}>
@@ -52,8 +60,16 @@ const Todo = () => {
         <button type="submit">{editId !== null ? "Update" : "Add"}</button>
       </form>
 
+      {/* 🔥 Filter buttons */}
+      <div style={{ margin: "1rem 0" }}>
+        <button onClick={() => setFilter("all")}>All</button>
+        <button onClick={() => setFilter("active")}>Active</button>
+        <button onClick={() => setFilter("completed")}>Completed</button>
+      </div>
+
+      {/* 🔥 Show filtered todos */}
       <div>
-        {todoState.map((todo) => (
+        {filteredTodos.map((todo) => (
           <div key={todo.id}>
             <h3
               style={{
