@@ -15,7 +15,7 @@ export const todoSlice = createSlice({
     updateTodo: (state, action) => {
       state.list.forEach((todo) => {
         if (todo.id === action.payload.id) {
-          todo.item = action.payload.item;
+          todo.text = action.payload.text;
         }
       });
     },
