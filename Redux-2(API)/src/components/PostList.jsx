@@ -16,7 +16,6 @@ const PostList = () => {
   const handleDelete = async (id) => {
     try {
       await deletePost(id).unwrap();
-      console.log("Post deleted:", id);
     } catch (err) {
       console.log("Delete failed:", err);
     }
@@ -35,7 +34,6 @@ const PostList = () => {
         body: "Updated",
         userId: 1,
       }).unwrap();
-      console.log("Post updated:", editId);
       setEditId(null);
       setEditTitle("");
     } catch (err) {

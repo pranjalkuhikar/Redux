@@ -16,7 +16,6 @@ const AddPost = () => {
         userId: 1,
       }).unwrap();
       setTitle("");
-      console.log("Post added!");
     } catch (err) {
       console.log("Failed to add post:", err);
     }
