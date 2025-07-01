@@ -1,8 +1,16 @@
 import React from "react";
-import Todo from "./pages/Todo";
+import AddPost from "./components/AddPost";
+import PostList from "./components/PostList";
 
 const App = () => {
-  return <Todo />;
+  return (
+    <div>
+      <h1>RTK Query Example</h1>
+      <AddPost />
+      <hr />
+      <PostList />
+    </div>
+  );
 };
 
 export default App;
