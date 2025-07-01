@@ -19,7 +19,14 @@ export const apiSlice = createApi({
         body: newPost,
       }),
     }),
+    deletePost: builder.mutation({
+      query: (id) => ({
+        url: `posts/${id}`,
+        method: "DELETE",
+      }),
+    }),
   }),
 });
 
-export const { useGetPostsQuery, useAddPostMutation } = apiSlice;
+export const { useGetPostsQuery, useAddPostMutation, useDeletePostMutation } =
+  apiSlice;
