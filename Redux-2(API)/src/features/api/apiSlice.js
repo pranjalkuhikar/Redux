@@ -3,12 +3,16 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const apiSlice = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://jsonplaceholder.typicode.com/",
+    baseUrl: "http://localhost:3001/",
   }),
+  tagTypes: ["Posts"],
+
   endpoints: (builder) => ({
     // GET all posts
     getPosts: builder.query({
       query: () => "posts",
+      providesTags: ["Posts"],
+      refetchOnMountOrArgChange: true,
     }),
 
     // POST a new post
@@ -18,14 +22,18 @@ export const apiSlice = createApi({
         method: "POST",
         body: newPost,
       }),
+      invalidatesTags: ["Posts"],
     }),
+
     // DELETE a post
     deletePost: builder.mutation({
       query: (id) => ({
         url: `posts/${id}`,
         method: "DELETE",
       }),
+      invalidatesTags: ["Posts"],
     }),
+
     // UPDATE a post
     updatePost: builder.mutation({
       query: ({ id, ...updatedPost }) => ({
@@ -33,6 +41,7 @@ export const apiSlice = createApi({
         method: "PUT",
         body: updatedPost,
       }),
+      invalidatesTags: ["Posts"],
     }),
   }),
 });
