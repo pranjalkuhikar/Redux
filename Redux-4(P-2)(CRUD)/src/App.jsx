@@ -20,7 +20,7 @@ const App = () => {
   return (
     <>
       <form onSubmit={submitHandler}>
-        <h1>Todo App</h1>
+        <h1>Todo App 2</h1>
         <input
           type="text"
           value={todo}
